@@ -8,10 +8,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.valentinerutto.anime.databinding.FragmentHomeBinding
+import com.valentinerutto.anime.ui.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private val viewmodel:MainViewModel by sharedViewModel<MainViewModel>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,11 +31,20 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textHome
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val textView: TextView = binding.textHome
+        viewmodel.successfulAnimeListResponse.observe(viewLifecycleOwner) {
+            textView.text = it.toString()
+        }
+
     }
 
     override fun onDestroyView() {

@@ -1,4 +1,4 @@
-package com.valentinerutto.anime.network.remote
+package com.valentinerutto.anime.data.remote.model
 
 
 import kotlinx.serialization.SerialName

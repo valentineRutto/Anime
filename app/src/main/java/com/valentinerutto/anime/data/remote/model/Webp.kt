@@ -1,11 +1,11 @@
-package com.valentinerutto.anime.network.remote
+package com.valentinerutto.anime.data.remote.model
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Jpg(
+data class Webp(
     @SerialName("image_url")
     val imageUrl: String,
     @SerialName("large_image_url")
