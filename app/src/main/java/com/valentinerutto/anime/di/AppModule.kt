@@ -25,7 +25,7 @@ val appModule = module {
     }
     single { AnimeRepository(apiservice = get(),animeDao = database().animeDao()) }
 
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(),get()) }
 
     single { AnimeDatabase.getDatabase(context = androidContext()) }
 

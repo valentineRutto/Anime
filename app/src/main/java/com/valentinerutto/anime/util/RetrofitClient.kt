@@ -1,5 +1,6 @@
 package com.valentinerutto.anime.util
 
+import com.skydoves.retrofit.adapters.paging.PagingCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,6 +14,7 @@ object RetrofitClient {
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(PagingCallAdapterFactory.create())
             .build()
     }
 

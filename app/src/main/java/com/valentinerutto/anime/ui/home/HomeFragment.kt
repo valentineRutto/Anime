@@ -4,29 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.valentinerutto.anime.databinding.FragmentHomeBinding
 import com.valentinerutto.anime.ui.MainViewModel
+import com.valentinerutto.anime.ui.PagedAnimeListAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val viewmodel:MainViewModel by sharedViewModel<MainViewModel>()
+    private val viewmodel: MainViewModel by sharedViewModel<MainViewModel>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -40,11 +41,19 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textView: TextView = binding.textHome
-        viewmodel.successfulAnimeListResponse.observe(viewLifecycleOwner) {
-            textView.text = it.toString()
-        }
+        val adapter = PagedAnimeListAdapter()
 
+        binding.animeProgressBar.isVisible = false
+
+        lifecycleScope.launchWhenCreated {
+
+            viewmodel.fetchPagingSource().collectLatest {
+                binding.animeRecyclerView.adapter = adapter.apply {
+                    submitData(it)
+                }
+            }
+
+        }
     }
 
     override fun onDestroyView() {

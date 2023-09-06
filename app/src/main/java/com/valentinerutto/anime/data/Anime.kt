@@ -1,6 +1,7 @@
 package com.valentinerutto.anime.data
 
 data class Anime(
+    val id:Int,
     val title: String,
     val episodes: Int,
     val imgUrl: String,

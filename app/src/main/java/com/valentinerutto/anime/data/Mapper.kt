@@ -3,7 +3,7 @@ package com.valentinerutto.anime.data
 import com.valentinerutto.anime.data.local.AnimeEntity
 import com.valentinerutto.anime.data.remote.model.TopAnimeResponse
 
-fun mapResponseToEntity(animeResponse: TopAnimeResponse?): List<AnimeEntity> {
+fun map(animeResponse: TopAnimeResponse?): List<AnimeEntity> {
     return animeResponse?.data?.map {
         AnimeEntity(
             id = 0,
@@ -18,3 +18,4 @@ fun mapResponseToEntity(animeResponse: TopAnimeResponse?): List<AnimeEntity> {
         )
     } ?: emptyList()
 }
+
