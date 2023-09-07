@@ -20,12 +20,6 @@ The following are the features of the application;
 [Jetpack](https://developer.android.com/jetpack) -<br/>
 -[Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android.<br/><br/>
 
-# Features<br/>
--show list of tourists profile 
--tourists profile clicked show details 
--show list of news feed 
--Make app adaptable to large screens
--Offline mode enable
 
 # Architecture<br/>
 The app contains these packages: 
