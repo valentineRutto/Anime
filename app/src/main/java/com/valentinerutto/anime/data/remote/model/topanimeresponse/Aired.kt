@@ -1,17 +1,15 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Aired(
-    @SerialName("from")
-    val from: String,
-    @SerialName("prop")
-    val prop: Prop,
-    @SerialName("string")
-    val string: String,
-    @SerialName("to")
-    val to: String
+    @SerializedName("from")
+    val from: String?,
+    @SerializedName("prop")
+    val prop: Prop?,
+    @SerializedName("string")
+    val string: String?,
+    @SerializedName("to")
+    val to: String?
 )

@@ -1,17 +1,15 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Trailer(
-    @SerialName("embed_url")
-    val embedUrl: String,
-    @SerialName("images")
-    val images: ImagesX,
-    @SerialName("url")
-    val url: String,
-    @SerialName("youtube_id")
-    val youtubeId: String
+    @SerializedName("embed_url")
+    val embedUrl: String?,
+    @SerializedName("images")
+    val images: ImagesX?,
+    @SerializedName("url")
+    val url: String?,
+    @SerializedName("youtube_id")
+    val youtubeId: String?
 )

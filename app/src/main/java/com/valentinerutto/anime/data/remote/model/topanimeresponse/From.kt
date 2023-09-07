@@ -1,15 +1,13 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class From(
-    @SerialName("day")
-    val day: Int,
-    @SerialName("month")
-    val month: Int,
-    @SerialName("year")
-    val year: Int
+    @SerializedName("day")
+    val day: Int?,
+    @SerializedName("month")
+    val month: Int?,
+    @SerializedName("year")
+    val year: Int?
 )

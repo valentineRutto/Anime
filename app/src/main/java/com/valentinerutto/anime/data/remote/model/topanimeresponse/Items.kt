@@ -1,15 +1,13 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Items(
-    @SerialName("count")
-    val count: Int,
-    @SerialName("per_page")
-    val perPage: Int,
-    @SerialName("total")
-    val total: Int
+    @SerializedName("count")
+    val count: Int?,
+    @SerializedName("per_page")
+    val perPage: Int?,
+    @SerializedName("total")
+    val total: Int?
 )

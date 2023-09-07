@@ -1,13 +1,11 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Title(
-    @SerialName("title")
-    val title: String,
-    @SerialName("type")
-    val type: String
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("type")
+    val type: String?
 )

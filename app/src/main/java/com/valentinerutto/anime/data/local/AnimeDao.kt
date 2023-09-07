@@ -8,6 +8,8 @@ import com.valentinerutto.anime.util.BaseDao
 interface AnimeDao : BaseDao<AnimeEntity> {
 
     @Query("SELECT * FROM anime_table")
-    fun getTravelDetails(): List<AnimeEntity>
+    fun getAnimeDetails(): List<AnimeEntity>
 
+    @Query("DELETE FROM anime_table")
+    fun deleteAll()
 }

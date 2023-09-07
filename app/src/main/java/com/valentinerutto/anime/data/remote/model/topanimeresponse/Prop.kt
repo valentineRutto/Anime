@@ -1,13 +1,11 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Prop(
-    @SerialName("from")
-    val from: From,
-    @SerialName("to")
-    val to: To
+    @SerializedName("from")
+    val from: From?,
+    @SerializedName("to")
+    val to: To?
 )

@@ -1,17 +1,15 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Genre(
-    @SerialName("mal_id")
-    val malId: Int,
-    @SerialName("name")
-    val name: String,
-    @SerialName("type")
-    val type: String,
-    @SerialName("url")
-    val url: String
+    @SerializedName("mal_id")
+    val malId: Int?,
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("type")
+    val type: String?,
+    @SerializedName("url")
+    val url: String?
 )

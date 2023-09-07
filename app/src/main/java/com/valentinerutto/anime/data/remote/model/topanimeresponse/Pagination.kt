@@ -1,17 +1,15 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Pagination(
-    @SerialName("current_page")
-    val currentPage: Int,
-    @SerialName("has_next_page")
-    val hasNextPage: Boolean,
-    @SerialName("items")
-    val items: Items,
-    @SerialName("last_visible_page")
-    val lastVisiblePage: Int
+    @SerializedName("current_page")
+    val currentPage: Int?,
+    @SerializedName("has_next_page")
+    val hasNextPage: Boolean?,
+    @SerializedName("items")
+    val items: Items?,
+    @SerializedName("last_visible_page")
+    val lastVisiblePage: Int?
 )

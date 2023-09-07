@@ -15,18 +15,37 @@ import okhttp3.MultipartBody
 
 class AnimeRepository(private val apiservice: ApiService, private val animeDao: AnimeDao) {
 
-    suspend fun getTopAnime(): Resource<List<AnimeEntity>> {
-        val response = apiservice.getTopAnime()
-//        if (!response.isSuccessful)return Resource.Error(errorMessage = response.message())
-//        val entity = mapResponseToEntity(response.body())
-        // animeDao.insert(entity)
-        return Resource.Success(data = animeDao.getTravelDetails())
+    suspend fun getTopAnime(page: Int, limit: Int): Resource<List<AnimeEntity>> {
+        val response = apiservice.getAnimeList(limit, page)
+
+        val dbData = animeDao.getAnimeDetails()
+
+        if (!response.isSuccessful) return Resource.Error(errorMessage = response.message())
+
+        val entity = map(response.body())
+
+        if (dbData.isNotEmpty()) {
+            animeDao.deleteAll()
+        }
+
+        animeDao.insert(entity)
+
+        return Resource.Success(data = animeDao.getAnimeDetails())
     }
 
-    suspend fun uploadImage(image: MultipartBody.Part):Resource<List<UploadedImage>>{
+    suspend fun getSavedAnime(): Resource<List<AnimeEntity>> {
+        val dbData = animeDao.getAnimeDetails()
+        return if (dbData.isNotEmpty()) {
+            Resource.Success(data = animeDao.getAnimeDetails())
+        } else {
+            Resource.Error("No data saved")
+        }
+    }
+
+    suspend fun uploadImage(image: MultipartBody.Part): Resource<List<UploadedImage>> {
         val response = apiservice.uploadImage(image)
         if (!response.isSuccessful) return Resource.Error(errorMessage = response.message())
-        val  uploadedImage = mapImage(response.body())
+        val uploadedImage = mapImage(response.body())
         return Resource.Success(data = uploadedImage)
     }
 
@@ -34,5 +53,6 @@ class AnimeRepository(private val apiservice: ApiService, private val animeDao: 
         val pagingSource = apiservice.getTopAnime()
         val pagerFlow = Pager(PagingConfig(pageSize = 25)) { pagingSource }.flow
         emitAll(pagerFlow)
+
     }
 }

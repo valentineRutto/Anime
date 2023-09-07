@@ -2,15 +2,14 @@ package com.valentinerutto.anime.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.valentinerutto.anime.data.remote.model.topanimeresponse.Data
+import com.valentinerutto.anime.data.local.AnimeEntity
 import com.valentinerutto.anime.databinding.RowAnimeBinding
 
-class PagedAnimeListAdapter :
-    PagingDataAdapter<Data, PagedAnimeListAdapter.AnimeViewHolder>(diff) {
+class AnimeListAdapter : ListAdapter<AnimeEntity, AnimeListAdapter.AnimeViewHolder>(diff) {
 
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val anime = getItem(position)
@@ -26,9 +25,9 @@ class PagedAnimeListAdapter :
     class AnimeViewHolder(private val binding: RowAnimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(anime: Data) {
+        fun bind(anime: AnimeEntity) {
             binding.animeTitle.text = anime.title
-            binding.imgCover.load(anime.images.jpg.imageUrl)
+            binding.imgCover.load(anime.imgUrl)
         }
     }
 
@@ -40,14 +39,14 @@ class PagedAnimeListAdapter :
             return AnimeViewHolder(binding)
         }
 
-        val diff = object : DiffUtil.ItemCallback<Data>() {
+        val diff = object : DiffUtil.ItemCallback<AnimeEntity>() {
             override fun areItemsTheSame(
-                oldItem: Data, newItem: Data
+                oldItem: AnimeEntity, newItem: AnimeEntity
             ): Boolean = oldItem == newItem
 
             override fun areContentsTheSame(
-                oldItem: Data, newItem: Data
-            ): Boolean = oldItem.malId == newItem.malId
+                oldItem: AnimeEntity, newItem: AnimeEntity
+            ): Boolean = oldItem.id == newItem.id
         }
     }
 }

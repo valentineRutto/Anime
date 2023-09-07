@@ -1,13 +1,11 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Images(
-    @SerialName("jpg")
-    val jpg: Jpg,
-    @SerialName("webp")
-    val webp: Webp
+    @SerializedName("jpg")
+    val jpg: Jpg?,
+    @SerializedName("webp")
+    val webp: Webp?
 )

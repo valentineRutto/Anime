@@ -1,17 +1,15 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Broadcast(
-    @SerialName("day")
-    val day: String,
-    @SerialName("string")
-    val string: String,
-    @SerialName("time")
-    val time: String,
-    @SerialName("timezone")
-    val timezone: String
+    @SerializedName("day")
+    val day: String?,
+    @SerializedName("string")
+    val string: String?,
+    @SerializedName("time")
+    val time: String?,
+    @SerializedName("timezone")
+    val timezone: String?
 )

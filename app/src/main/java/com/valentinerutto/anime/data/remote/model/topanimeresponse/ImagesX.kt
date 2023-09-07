@@ -1,19 +1,17 @@
 package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class ImagesX(
-    @SerialName("image_url")
-    val imageUrl: String,
-    @SerialName("large_image_url")
-    val largeImageUrl: String,
-    @SerialName("maximum_image_url")
-    val maximumImageUrl: String,
-    @SerialName("medium_image_url")
-    val mediumImageUrl: String,
-    @SerialName("small_image_url")
-    val smallImageUrl: String
+    @SerializedName("image_url")
+    val imageUrl: String?,
+    @SerializedName("large_image_url")
+    val largeImageUrl: String?,
+    @SerializedName("maximum_image_url")
+    val maximumImageUrl: String?,
+    @SerializedName("medium_image_url")
+    val mediumImageUrl: String?,
+    @SerializedName("small_image_url")
+    val smallImageUrl: String?
 )

@@ -8,6 +8,7 @@ data class AnimeEntity(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
     val malId:Int?,
+    val lastVisiblePage:Int?,
     val title: String?,
     val episodes: Int?,
     val imgUrl: String?,
