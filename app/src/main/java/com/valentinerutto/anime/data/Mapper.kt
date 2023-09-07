@@ -1,7 +1,8 @@
 package com.valentinerutto.anime.data
 
 import com.valentinerutto.anime.data.local.AnimeEntity
-import com.valentinerutto.anime.data.remote.model.TopAnimeResponse
+import com.valentinerutto.anime.data.remote.model.topanimeresponse.TopAnimeResponse
+import com.valentinerutto.anime.data.remote.model.uploadImageresponse.SearchImagePostResponse
 
 fun map(animeResponse: TopAnimeResponse?): List<AnimeEntity> {
     return animeResponse?.data?.map {
@@ -18,4 +19,10 @@ fun map(animeResponse: TopAnimeResponse?): List<AnimeEntity> {
         )
     } ?: emptyList()
 }
+    fun mapImage(uploadedImageResponse: SearchImagePostResponse?): List<UploadedImage> {
+        return uploadedImageResponse?.result?.map {
+            UploadedImage(fileImage = it.image, fileName = it.filename, episodes = it.episode.toString())
+        } ?: emptyList()
+    }
+
 

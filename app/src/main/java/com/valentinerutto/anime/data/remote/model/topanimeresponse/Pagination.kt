@@ -1,4 +1,4 @@
-package com.valentinerutto.anime.data.remote.model
+package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
 import kotlinx.serialization.SerialName

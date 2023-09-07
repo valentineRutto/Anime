@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.paging.map
 import com.valentinerutto.anime.data.Anime
 import com.valentinerutto.anime.data.AnimeRepository
+import com.valentinerutto.anime.data.UploadedImage
 import com.valentinerutto.anime.data.remote.ApiService
-import com.valentinerutto.anime.data.remote.model.Data
+import com.valentinerutto.anime.data.remote.model.topanimeresponse.Data
 import com.valentinerutto.anime.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,12 +21,21 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 
 class MainViewModel(private val animeRepository: AnimeRepository, val apiService: ApiService) :
     ViewModel() {
     private val _sucessAnimeListResponse = MutableLiveData<List<Anime>?>()
     val successfulAnimeListResponse: LiveData<List<Anime>?>
         get() = _sucessAnimeListResponse
+
+    private val _sucessImageListResponse = MutableLiveData<List<UploadedImage>?>()
+    val successfulImageListResponse: LiveData<List<UploadedImage>?>
+        get() = _sucessImageListResponse
+
+    private val _errorImageResponse = MutableLiveData<String>()
+    val errorImageResponse: LiveData<String>
+        get() = _errorImageResponse
 
     private val _errorAnimeListResponse = MutableLiveData<String>()
     val errorAnimeListResponse: LiveData<String>
@@ -39,19 +50,23 @@ class MainViewModel(private val animeRepository: AnimeRepository, val apiService
         when (val response = animeRepository.getTopAnime()) {
             is Resource.Success -> {
                 _isLoading.postValue(false)
-                //  _sucessAnimeListResponse.postValue(response.data)
+               //_sucessAnimeListResponse.postValue(response.data)
             }
 
             is Resource.Error -> {
                 _isLoading.postValue(false)
                 _errorAnimeListResponse.postValue(response.errorMessage)
             }
+
+            else -> {
+
+            }
         }
     }
 
     fun fetchAnimeList() {
         viewModelScope.launch(Dispatchers.IO) {
-            getAnime()
+            //getAnime()
         }
     }
 
@@ -73,14 +88,38 @@ class MainViewModel(private val animeRepository: AnimeRepository, val apiService
                     duration = it.duration
                 )
             }
-           // _sucessAnimeListResponse.postValue(animelist.)
+            // _sucessAnimeListResponse.postValue(animelist.)
         }
 
     }
 
     suspend fun fetchPagingSource(): Flow<PagingData<Data>> = flow {
         val pagingSource = apiService.getTopAnime()
-                val pagerFlow = Pager(PagingConfig(pageSize = 20)) { pagingSource }.flow
+        val pagerFlow =
+            Pager(PagingConfig(pageSize = 20)) { pagingSource }.flow.cachedIn(viewModelScope)
         emitAll(pagerFlow)
+    }
+
+    fun uploadImage(image: MultipartBody.Part) {
+        viewModelScope.launch {
+            _isLoading.postValue(true)
+
+
+            when (val result = animeRepository.uploadImage(image)) {
+                is Resource.Error -> {
+                    _isLoading.postValue(false)
+                    _errorImageResponse.postValue(result.errorMessage)
+                }
+
+                is Resource.Success -> {
+                    _isLoading.postValue(false)
+                    _sucessImageListResponse.postValue(result.data)
+                }
+
+                else -> {
+                    //to be done
+                }
+            }
+        }
     }
 }

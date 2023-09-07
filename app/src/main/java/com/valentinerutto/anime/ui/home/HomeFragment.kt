@@ -27,15 +27,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
     }
 
@@ -45,13 +39,13 @@ class HomeFragment : Fragment() {
 
         binding.animeProgressBar.isVisible = false
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
 
-            viewmodel.fetchPagingSource().collectLatest {
-                binding.animeRecyclerView.adapter = adapter.apply {
-                    submitData(it)
-                }
-            }
+//            viewmodel.fetchPagingSource().collectLatest {
+//                binding.animeRecyclerView.adapter = adapter.apply {
+//                    submitData(it)
+//                }
+//            }
 
         }
     }

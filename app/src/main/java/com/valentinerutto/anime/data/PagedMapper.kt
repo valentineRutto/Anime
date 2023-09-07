@@ -1,10 +1,10 @@
 package com.valentinerutto.anime.data
 
 import com.skydoves.retrofit.adapters.paging.PagingMapper
-import com.valentinerutto.anime.data.remote.model.Data
-import com.valentinerutto.anime.data.remote.model.TopAnimeResponse
+import com.valentinerutto.anime.data.remote.model.topanimeresponse.Data
+import com.valentinerutto.anime.data.remote.model.topanimeresponse.TopAnimeResponse
 
-class PagedMapper : PagingMapper<TopAnimeResponse,Data>{
+class PagedMapper : PagingMapper<TopAnimeResponse, Data>{
 
     override fun map(value: TopAnimeResponse): List<Data> {
         return value.data

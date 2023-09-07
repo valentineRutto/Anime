@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-   // id("com.google.devtools.ksp")
+    // id("com.google.devtools.ksp")
     id("kotlin-kapt")
 
 }
@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.valentinerutto.anime"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -44,6 +44,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.activity:activity-ktx:1.7.2")
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
@@ -56,17 +57,19 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
-    // Room
-    implementation("androidx.room:room-runtime:2.5.2")
+
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.5.2")
     kapt("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
     //coil
     implementation("io.coil-kt:coil:2.4.0")
     //DI-Koin
     implementation("io.insert-koin:koin-android:3.4.3")
-//paging
+   //paging
     implementation("com.github.skydoves:retrofit-adapters-paging:1.0.8")
 
     implementation("com.squareup.okhttp3:okhttp:4.11.0")

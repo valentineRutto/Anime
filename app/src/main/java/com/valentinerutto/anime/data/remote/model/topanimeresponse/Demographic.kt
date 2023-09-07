@@ -1,11 +1,11 @@
-package com.valentinerutto.anime.data.remote.model
+package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Genre(
+data class Demographic(
     @SerialName("mal_id")
     val malId: Int,
     @SerialName("name")

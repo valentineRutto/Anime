@@ -1,11 +1,11 @@
-package com.valentinerutto.anime.data.remote.model
+package com.valentinerutto.anime.data.remote.model.topanimeresponse
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class From(
+data class To(
     @SerialName("day")
     val day: Int,
     @SerialName("month")
