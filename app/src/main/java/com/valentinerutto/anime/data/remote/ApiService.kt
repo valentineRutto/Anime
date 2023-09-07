@@ -19,20 +19,17 @@ interface ApiService {
 
     @GET("top/anime")
     @PagingKeyConfig(
-        keySize = 1
-        ,
-        mapper = PagedMapper::class
+        keySize = 1, mapper = PagedMapper::class
     )
     suspend fun getTopAnime(
         @Query("limit") limit: Int = 25,
-       @PagingKey @Query("page")
-        page: Int = 1,
+        @PagingKey @Query("page") page: Int = 1,
     ): NetworkPagingSource<AnimeResponse, Data>
+
     @GET("top/anime")
     suspend fun getAnimeList(
         @Query("limit") limit: Int,
-       @Query("page")
-        page: Int,
+        @Query("page") page: Int,
     ): Response<AnimeResponse>
 
     @Multipart

@@ -41,7 +41,10 @@ class MainViewModel(private val animeRepository: AnimeRepository, val apiService
         get() = _isLoading
 
     private suspend fun getAnime(page: Int) {
+
         _isLoading.postValue(true)
+        _sucessAnimeListResponse.postValue(emptyList())
+
         when (val response = animeRepository.getTopAnime(page, 25)) {
             is Resource.Success -> {
                 _isLoading.postValue(false)
@@ -87,27 +90,6 @@ class MainViewModel(private val animeRepository: AnimeRepository, val apiService
         }
     }
 
-    suspend fun fetchAnimeListAsPagingSource() {
-        val animePagedList = animeRepository.fetchAnimeListAsPagingSource()
-
-        animePagedList.collectLatest {
-
-            val animelist = it.map { it ->
-//                Anime(
-//                    id = it.malId,
-//                    title = it.title,
-//                    episodes = it.episodes,
-//                    imgUrl = it.images.jpg.imageUrl,
-//                    score = it.score,
-//                    ratings = it.rating,
-//                    year = it.year.toString(),
-//                    duration = it.duration
-//                )
-            }
-            // _sucessAnimeListResponse.postValue(animelist.)
-        }
-
-    }
 
     suspend fun fetchPagingSource(): Flow<PagingData<Data>> {
         return animeRepository.fetchAnimeListAsPagingSource()

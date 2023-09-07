@@ -91,7 +91,7 @@ class DashboardFragment : Fragment() {
                 viewModel.uploadImage(imagePart)
 
                 Toast.makeText(
-                    requireActivity(), "Media selected:${file.name}", Toast.LENGTH_SHORT
+                    requireActivity(), "Uploading Image selected:${file.name}", Toast.LENGTH_SHORT
                 ).show()
 
 
