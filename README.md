@@ -51,3 +51,10 @@ contains views that are shown to the user
 # Installation
 Clone the repo and run on emulator or phone  or download the apk file 
 
+# Screenshots
+![Anime List](https://github.com/valentineRutto/Anime/blob/main/animelist.png)
+![Photo Picker](https://github.com/valentineRutto/Anime/blob/main/takepic.png)
+![Upload Photo](https://github.com/valentineRutto/Anime/blob/main/imageupload.png)
+
+
+
